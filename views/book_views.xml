@@ -1,0 +1,73 @@
+<odoo>
+    <record id="book_library_tree" model="ir.ui.view">
+        <field name="name">book.library.tree</field>
+        <field name="model">book.library</field>
+        <field name="arch" type="xml">
+            <tree string="Perpustakaan Buku">
+                <field name="code_formatted"/>
+                <field name="name"/>
+                <field name="category"/>
+                <field name="release_date"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="book_library_form" model="ir.ui.view">
+        <field name="name">book.library.form</field>
+        <field name="model">book.library</field>
+        <field name="arch" type="xml">
+            <form string="Form Buku">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code_input" maxlength="13"/>
+                        <field name="code_formatted"/>
+                        <field name="release_date"/>
+                        <field name="category"/>
+                        <field name="quantity"/>
+                        <field name="price"/>
+                    </group>
+                    <notebook>
+                        <page string="Penulis">
+                            <field name="author_ids" nolabel="1"/>
+                        </page>
+                        <page string="Transaksi">
+                            <field name="transaction_ids" nolabel="1" readonly="1">
+                                <tree>
+                                    <field name="rental_date"/>
+                                    <field name="renter_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="book_library_search" model="ir.ui.view">
+        <field name="name">book.library.search</field>
+        <field name="model">book.library</field>
+        <field name="arch" type="xml">
+            <search string="Search Book">
+                <field name="release_date" string="Tanggal Rilis"/>
+                <field name="category" string="Kategori"/>
+                <filter string="Hari ini" name="today_filter" domain="[('release_date', '=', context_today())]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="book_library_action" model="ir.actions.act_window">
+        <field name="name">Library</field>
+        <field name="res_model">book.library</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p name="o_view_nocontent_smiling_face">
+                Tambahkan buku ke perpustakaan
+            </p>
+        </field>
+    </record>
+
+</odoo>

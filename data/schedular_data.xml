@@ -1,0 +1,15 @@
+<odoo>
+
+    <record id="overdue_rental_cron" model="ir.cron">
+        <field name="name">Book Transaction: Update status overdue for renting exceed return date.</field>
+        <field name="model_id" ref="model_book_transaction"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_overdue_rental()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_book_library,book_library,model_book_library,base.group_user,1,1,1,1
+access_book_member,book_member,model_book_member,base.group_user,1,1,1,1
+access_book_transaction,book_transaction,model_book_transaction,base.group_user,1,1,1,1
+access_book_transaction_line,book_transaction_line,model_book_transaction_line,base.group_user,1,1,1,1
+
+
+access_book_library,book_library,model_book_library,group_admin_book,1,1,1,1
+
+access_book_member,book_member,model_book_member,group_admin_member,1,1,1,1
+
+access_book_transaction,book_transaction,model_book_transaction,group_admin_rental,1,1,1,1
+access_book_transaction_line,book_transaction_line,model_book_transaction_line,group_admin_rental,1,1,1,1

@@ -1,0 +1,12 @@
+<odoo>
+    <record id="action_report_book_member" model="ir.actions.report">
+        <field name="name">Book Member (PDF)</field>
+        <field name="model">book.member</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">odoo_buku.report_member_transaction</field>
+        <field name="report_file">odoo_buku.report_book_member</field>
+        <field name="print_report_name">'Member -%s' %(object.name)</field>
+        <field name="binding_model_id" ref="model_book_member"/>
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>

@@ -1,0 +1,59 @@
+<odoo>
+    <record id="book_member_tree" model="ir.ui.view">
+        <field name="name">book.member.tree</field>
+        <field name="model">book.member</field>
+        <field name="arch" type="xml">
+            <tree string="Daftar Anggota Perpustakaan">
+                <field name="name"/>
+                <field name="identity_type"/>
+                <field name="identity_number"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="book_member_form" model="ir.ui.view">
+        <field name="name">book.member.form</field>
+        <field name="model">book.member</field>
+        <field name="arch" type="xml">
+            <form string="Form Anggota">
+                <header>
+                    <button name="action_approve" type="object" string="Approve" invisible="state != 'draft'" class="btn-primary" groups="odoo_buku.group_manager_member"/>
+
+                    <button name="action_print_member" type="object" string="Print Member" invisible="state != 'approved'"/>
+
+                    <button name="action_revoke" type="object" string="Revoke" invisible="state != 'approved'" groups="odoo_buku.group_manager_member"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" readonly="state !='draft'"/>
+                        <field name="identity_type" readonly="state !='draft'"/>
+                        <field name="identity_number" readonly="state !='draft'"/>
+                    </group>
+                    <notebook>
+                        <page string="Transaksi">
+                            <field name="transaction_line" mode="tree" nolabel="1" readonly="1">
+                                <tree string="Transaksi">
+                                    <field name="rental_date"/>
+                                    <field name="return_date"/>
+                                    <field name="renter_id"/>
+                                    <field name="rent_fee"/>
+                                    <field name="state"/>
+                                    <field name="return_state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="book_member_action" model="ir.actions.act_window">
+        <field name="name">Member</field>    
+        <field name="res_model">book.member</field>    
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

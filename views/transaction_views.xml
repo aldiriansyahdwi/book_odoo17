@@ -1,0 +1,65 @@
+<odoo>
+
+    <record id="book_transaction_tree" model="ir.ui.view">
+        <field name="name">book.transaction.tree</field>
+        <field name="model">book.transaction</field>
+        <field name="arch" type="xml">
+            <tree string="Daftar Transaksi" default_order = "rental_date desc" delete="0" decoration-info="state == 'done'" decoration-danger="state == 'overdue'">
+                <field name="rental_date"/>
+                <field name="return_date"/>
+                <field name="renter_id"/>
+                <field name="rent_fee"/>
+                <field name="state"/>
+                <field name="return_state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="book_transaction_form" model="ir.ui.view">
+        <field name="name">book.transaction.form</field>
+        <field name="model">book.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Form Transaksi">
+                <header>
+                    <button name="action_return" type="object" string="Dikembalikan" invisible="state == 'done'" class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="rented,overdue,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="rental_date" readonly="state == 'done'"/>
+                        <field name="return_date" readonly="state == 'done'"/>
+                        <field name="renter_id" readonly="state == 'done'"/>
+                        <field name="rent_fee" readonly="state == 'done'"/>
+                    </group>
+                    <notebook>
+                        <!-- <page string="Buku Disewa">
+                            <field name="book_rented_ids" nolabel="1">
+                            </field>
+                        </page> -->
+                        <page string="Buku Disewa">
+                            <field name="book_rented_ids" readonly="state == 'done'">
+                                <tree editable="bottom">
+                                    <field name="book_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="book_id"/>
+                                        <field name="quantity"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="book_transaction_action" model="ir.actions.act_window">
+        <field name="name">Transaction</field>
+        <field name="res_model">book.transaction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem id="main_menu_book" name="Book"/>
+    <menuitem id="menu_bar_book" name="Library" parent="main_menu_book"/>
+    <menuitem id="menu_item_book_master_book" name="Master Book" parent="menu_bar_book" action="book_library_action"/>
+    <menuitem id="menu_item_book_master_member" name="Master Member" parent="menu_bar_book" action="book_member_action"/>
+    <menuitem id="menu_item_book_transaction" name="Rental transaction" parent="menu_bar_book" action="book_transaction_action"/>
+    <menuitem id="menu_item_book_master_author" name="Master Author" parent="menu_bar_book" action="book_author_action"/>
+</odoo>

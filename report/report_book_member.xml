@@ -1,0 +1,63 @@
+<odoo>
+    <template id="report_member_transaction">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Laporan Transaksi Penyewaan</h2>
+                        <p><strong>Nama Penyewa:</strong> <t t-esc="doc.name"/></p>
+                        <p><strong>Tipe Identitas:</strong> <t t-esc="doc.identity_type"/></p>
+                        <p><strong>Nomor Identitas:</strong> <t t-esc="doc.identity_number"/></p>
+                        
+                        <h3>Daftar Transaksi:</h3>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal Penyewaan</th>
+                                    <th>Tanggal Pengembalian</th>
+                                    <th>Total Biaya</th>
+                                    <th>Daftar Buku</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.transaction_line" t-as="transaction">
+                                    <tr>
+                                        <td><t t-esc="transaction.rental_date"/></td>
+                                        <td><t t-esc="transaction.return_date"/></td>
+                                        <td><t t-esc="transaction.rent_fee"/></td>
+                                        <td>
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Buku</th>
+                                                        <th>Kuantitas</th>
+                                                        <th>Harga per Buku</th>
+                                                        <th>Total Harga</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="transaction.book_rented_ids" t-as="line">
+                                                        <tr>
+                                                            <td><t t-esc="line.book_id.name"/></td>
+                                                            <td><t t-esc="line.quantity"/></td>
+                                                            <td><t t-esc="line.book_id.price"/></td>
+                                                            <td><t t-esc="line.quantity * line.book_id.price"/></td>
+                                                        </tr>
+                                                    </t>
+                                                    <tr>
+                                                        <td colspan="3"><strong>Total Biaya:</strong></td>
+                                                        <td><t t-esc="transaction.rent_fee"/></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
